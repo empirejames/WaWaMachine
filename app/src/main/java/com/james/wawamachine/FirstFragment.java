@@ -95,10 +95,7 @@ public class FirstFragment extends Fragment implements OnMapReadyCallback {
         // Snackbar.make(R.layout.activity_maps, "error_location_provider", Snackbar.LENGTH_LONG).show();
         else {
             if (isNetworkEnabled) {
-                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_CALENDAR)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    Log.e(TAG,"Nothing...");
-                }
+
                 mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
                         LOCATION_UPDATE_MIN_TIME, LOCATION_UPDATE_MIN_DISTANCE, mLocationListener);
                 location = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);

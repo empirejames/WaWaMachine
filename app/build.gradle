@@ -27,4 +27,10 @@ dependencies {
     implementation 'com.google.maps.android:android-maps-utils:0.4+'
     implementation 'pub.devrel:easypermissions:1.2.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+
+
+    implementation 'com.google.firebase:firebase-database:12.0.1'
 }
+
+
+apply plugin: 'com.google.gms.google-services'

@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">娃娃機地圖</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="plz_input_accout">請輸入Email</string>
+    <string name="plz_input_pw">請輸入密碼</string>
+
+
 </resources>

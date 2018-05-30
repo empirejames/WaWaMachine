@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "503347564593",
+    "firebase_url": "https://wawamachine-1527579654356.firebaseio.com",
+    "project_id": "wawamachine-1527579654356",
+    "storage_bucket": "wawamachine-1527579654356.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503347564593:android:07d37e92ce395438",
+        "android_client_info": {
+          "package_name": "com.james.wawamachine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503347564593-8g8j4skj93qtser0lhr0vh0cc3gmtmv8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.james.wawamachine",
+            "certificate_hash": "9f6c903245c1c5e5f953596193e4661bbc545c36"
+          }
+        },
+        {
+          "client_id": "503347564593-45afolsqh92nic9srlqfi3krlnghcjg3.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "503347564593-45afolsqh92nic9srlqfi3krlnghcjg3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHnWFJYSeAJ5u__tMN9NY-U62PBDlk2YM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503347564593-45afolsqh92nic9srlqfi3krlnghcjg3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
