@@ -116,8 +116,7 @@ public class ThirdFragment extends Fragment{
                                 register(account, password);
                             }
                         } else {
-                            Intent i = new Intent(getActivity(), MainActivity.class);
-                            i.putExtra("isVistor", "N");
+                            Intent i = new Intent(getActivity(), SetDataActivity.class);
                             i.putExtra("name", user.getDisplayName());
                             i.putExtra("uid", user.getUid());
                             i.putExtra("email", user.getEmail());

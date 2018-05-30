@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.james.wawamachine.SetDataActivity"
+    tools:showIn="@layout/activity_set_data">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/relativeLayout">
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="44dp"
+            android:text="信箱 : "
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/email_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/email"
+            android:layout_alignBottom="@+id/email"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/email"
+            android:layout_toRightOf="@+id/email"
+            android:text="xxxx@hotmail.com"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView"
+            android:layout_alignStart="@+id/textView"
+            android:layout_below="@+id/textView"
+            android:layout_marginTop="24dp"
+            android:text="地點 :"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/location_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/email_content"
+            android:layout_alignStart="@+id/email_content"
+            android:layout_alignTop="@+id/location"
+            android:text="20,84 120.475"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/location"
+            android:layout_alignStart="@+id/location"
+            android:layout_centerVertical="true"
+            android:text="內容物 :"
+            android:textSize="24sp" />
+
+        <CheckedTextView
+            android:id="@+id/ctv_3c"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/item"
+            android:layout_alignStart="@+id/item"
+            android:layout_below="@+id/item"
+            android:layout_marginTop="21dp"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:checked="false"
+            android:text="3C"
+            android:textSize="24sp" />
+
+        <CheckedTextView
+            android:id="@+id/ctv_kungchi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/ctv_3c"
+            android:layout_alignStart="@+id/ctv_3c"
+            android:layout_below="@+id/ctv_3c"
+            android:layout_marginTop="12dp"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:checked="false"
+            android:text="公仔"
+            android:textSize="24sp" />
+
+        <CheckedTextView
+            android:id="@+id/ctv_buoh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/ctv_kungchi"
+            android:layout_alignStart="@+id/ctv_kungchi"
+            android:layout_below="@+id/ctv_kungchi"
+            android:layout_marginTop="12dp"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:checked="false"
+            android:text="布偶"
+            android:textSize="24sp" />
+
+        <CheckedTextView
+            android:id="@+id/ctv_cloth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ctv_kungchi"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="80dp"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:checked="false"
+            android:text="衣服"
+            android:textSize="24sp" />
+
+        <CheckedTextView
+            android:id="@+id/ctv_present"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/ctv_kungchi"
+            android:layout_alignBottom="@+id/ctv_kungchi"
+            android:layout_alignLeft="@+id/ctv_cloth"
+            android:layout_alignStart="@+id/ctv_cloth"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:checked="false"
+            android:text="禮物包"
+            android:textSize="24sp" />
+
+        <CheckedTextView
+            android:id="@+id/ctv_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/ctv_buoh"
+            android:layout_alignBottom="@+id/ctv_buoh"
+            android:layout_alignLeft="@+id/ctv_present"
+            android:layout_alignStart="@+id/ctv_present"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:checked="false"
+            android:text="其他"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/email"
+            android:layout_alignStart="@+id/email"
+            android:layout_below="@+id/email"
+            android:layout_marginTop="24dp"
+            android:text="拍照 :"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_getPic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView"
+            android:layout_alignBottom="@+id/textView"
+            android:layout_alignLeft="@+id/location_content"
+            android:layout_alignStart="@+id/location_content"
+            android:text="取得相片"
+            android:textSize="18sp" />
+
+        <com.ant.liao.GifView
+            android:id="@+id/gifView_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tv_getPic"
+            android:layout_toEndOf="@+id/ctv_present"
+            android:layout_toRightOf="@+id/ctv_present"
+            android:background="@drawable/ic_camera_alt_36dp" />
+        ic_camera_alt_36dp
+        <com.ant.liao.GifView
+            android:id="@+id/gifView_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/gifView_camera"
+            android:layout_alignStart="@+id/gifView_camera"
+            android:layout_alignTop="@+id/location_content"
+            android:background="@drawable/ic_location_on_36dp" />
+
+        <ImageView
+            android:id="@+id/img_downlaod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_getPic"
+            android:layout_marginLeft="23dp"
+            android:layout_marginStart="23dp"
+            android:layout_toEndOf="@+id/tv_getPic"
+            android:layout_toRightOf="@+id/tv_getPic"
+            app:srcCompat="@mipmap/account" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

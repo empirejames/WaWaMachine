@@ -90,7 +90,7 @@ public class FirstFragment extends Fragment implements OnMapReadyCallback {
 
         Location location = null;
         if (!(isGPSEnabled || isNetworkEnabled)){
-            Toast.makeText(getActivity().getApplicationContext(), "這是一個Toast......", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity().getApplicationContext(), "這是一個Toast......", Toast.LENGTH_LONG).show();
         }
         // Snackbar.make(R.layout.activity_maps, "error_location_provider", Snackbar.LENGTH_LONG).show();
         else {
