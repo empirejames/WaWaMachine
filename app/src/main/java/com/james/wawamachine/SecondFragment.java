@@ -25,6 +25,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.maps.android.kml.KmlLayer;
 
 import java.util.List;
@@ -39,7 +46,8 @@ public class SecondFragment extends Fragment implements OnMapReadyCallback {
     MapView mMapView;
     View mView;
     String TAG = FirstFragment.class.getSimpleName();
-
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
     private LocationManager mLocationManager;
     public static final int LOCATION_UPDATE_MIN_DISTANCE = 10;
     public static final int LOCATION_UPDATE_MIN_TIME = 5000;
@@ -53,6 +61,22 @@ public class SecondFragment extends Fragment implements OnMapReadyCallback {
         String[] perms = {android.Manifest.permission.ACCESS_FINE_LOCATION};
         mLocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         getCurrentLocation();
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user!=null){
+                    Log.e(TAG,"Get user id " +user.getUid());
+                }
+            }
+        };
+
+
+
+        // Write a message to the database
+
     }
 
     @Override
@@ -140,14 +164,6 @@ public class SecondFragment extends Fragment implements OnMapReadyCallback {
         if (mGooglemap != null) {
             mGooglemap.clear();
             try{
-                KmlLayer layer = new KmlLayer(mGooglemap, getActivity().getAssets().open("taipei.kml"), getActivity().getApplicationContext());
-                KmlLayer layer1 = new KmlLayer(mGooglemap, getActivity().getAssets().open("taichung.kml"), getActivity().getApplicationContext());
-                KmlLayer layer2 = new KmlLayer(mGooglemap, getActivity().getAssets().open("taichung-wuzi.kml"), getActivity().getApplicationContext());
-                KmlLayer layer3 = new KmlLayer(mGooglemap, getActivity().getAssets().open("tainan.kml"), getActivity().getApplicationContext());
-                layer.addLayerToMap();
-                layer1.addLayerToMap();
-                layer2.addLayerToMap();
-                layer3.addLayerToMap();
 
             }catch (Exception e){
 

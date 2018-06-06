@@ -26,7 +26,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="32dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="15dp"
             android:text="信箱 : "
             android:textSize="18sp" />
 
@@ -54,23 +54,23 @@
             android:text="地點 :"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/location_content"
+        <EditText
+            android:id="@+id/edit_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/email_content"
             android:layout_alignStart="@+id/email_content"
             android:layout_alignTop="@+id/location"
-            android:text="20,84 120.475"
+            android:text="新北市樹林區中華路95巷4號"
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/location"
-            android:layout_alignStart="@+id/location"
-            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/tv_price"
+            android:layout_alignStart="@+id/tv_price"
+            android:layout_below="@+id/edit_price"
             android:text="內容物 :"
             android:textSize="24sp" />
 
@@ -169,8 +169,8 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/textView"
             android:layout_alignBottom="@+id/textView"
-            android:layout_alignLeft="@+id/location_content"
-            android:layout_alignStart="@+id/location_content"
+            android:layout_alignLeft="@+id/edit_location"
+            android:layout_alignStart="@+id/edit_location"
             android:text="取得相片"
             android:textSize="18sp" />
 
@@ -189,7 +189,7 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/gifView_camera"
             android:layout_alignStart="@+id/gifView_camera"
-            android:layout_alignTop="@+id/location_content"
+            android:layout_alignTop="@+id/edit_location"
             android:background="@drawable/ic_location_on_36dp" />
 
         <ImageView
@@ -202,6 +202,59 @@
             android:layout_toEndOf="@+id/tv_getPic"
             android:layout_toRightOf="@+id/tv_getPic"
             app:srcCompat="@mipmap/account" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/location"
+            android:layout_alignStart="@+id/location"
+            android:layout_below="@+id/gifView_location"
+            android:layout_marginTop="12dp"
+            android:textSize="18sp"
+            android:text="名稱 :" />
+
+        <EditText
+            android:id="@+id/edit_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/edit_location"
+            android:layout_alignStart="@+id/edit_location"
+            android:layout_below="@+id/gifView_location"
+            android:ems="10"
+            android:text="樹中店"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/edit_price"
+            android:layout_alignBottom="@+id/edit_price"
+            android:layout_alignLeft="@+id/tv_name"
+            android:layout_alignStart="@+id/tv_name"
+            android:text="保夾價 :"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edit_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/edit_name"
+            android:layout_alignStart="@+id/edit_name"
+            android:layout_below="@+id/edit_name"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="390"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="上傳" />
 
     </RelativeLayout>
 

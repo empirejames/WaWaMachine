@@ -24,6 +24,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,11 +35,18 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+
+import id.zelory.compressor.Compressor;
 
 public class SetDataActivity extends AppCompatActivity {
     Bundle bundle;
@@ -45,7 +54,10 @@ public class SetDataActivity extends AppCompatActivity {
     String latitude, longitude;
     String TAG = SetDataActivity.class.getSimpleName();
     GifView giv_location, giv_pciture;
-    TextView tv_getPic, email_content, location_content;
+    TextView tv_getPic, email_content ;
+    EditText edit_location, edit_name, edit_price;
+    Button btn_send;
+    String img_name;
 
     private LocationManager mLocationManager;
     private StorageReference mStorageRef , imagesRef;
@@ -67,11 +79,16 @@ public class SetDataActivity extends AppCompatActivity {
         giv_pciture = (GifView)findViewById(R.id.gifView_camera);
         tv_getPic = (TextView)findViewById(R.id.tv_getPic);
         email_content = (TextView)findViewById(R.id.email_content);
-        location_content = (TextView)findViewById(R.id.location_content);
+        edit_location = (EditText)findViewById(R.id.edit_location);
+        edit_name = (EditText)findViewById(R.id.edit_name);
+        edit_price = (EditText)findViewById(R.id.edit_price);
+        btn_send = (Button)findViewById(R.id.btn_send);
+
+
         email_content.setText(email);
         mStorageRef = FirebaseStorage.getInstance().getReference();
         imagesRef = mStorageRef.child("images");
-        String name = imagesRef.getName();
+        Log.e(TAG,"img_path : " + img_name);
         giv_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,17 +101,30 @@ public class SetDataActivity extends AppCompatActivity {
                 checkPermission();
             }
         });
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                writeData(email,edit_location.getText().toString(),edit_name.getText().toString(),edit_price.getText().toString());
+                finish();
             }
         });
     }
 
+
+    private void writeData(final String email,final String location,final String name,final String price){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference userRef = database.getReference("user").child(userId);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+               userRef.push().setValue(new User(email,location,name,price,img_name));
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
     private void getCurrentLocation() {
         boolean isGPSEnabled = mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         boolean isNetworkEnabled = mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
@@ -119,7 +149,7 @@ public class SetDataActivity extends AppCompatActivity {
             }
         }
         if (location != null){
-            location_content.setText(location+"");
+            edit_location.setText(location+"");
             Log.e(TAG,location+"");
         }
             //drawMarker(location);
@@ -129,7 +159,7 @@ public class SetDataActivity extends AppCompatActivity {
         public void onLocationChanged(Location location) {
             if (location != null) {
                 Log.e(TAG, String.format("%f, %f", location.getLatitude(), location.getLongitude()));
-                location_content.setText(location.getLatitude()+","+location.getLongitude());
+                edit_location.setText(location.getLatitude()+","+location.getLongitude());
                 latitude = location.getLatitude()+"";
                 longitude = location.getLongitude()+"";
                 mLocationManager.removeUpdates(mLocationListener);
@@ -185,13 +215,14 @@ public class SetDataActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Compressor compressedImageFile;
         if (requestCode == PICK_CONTACT_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri uri = data.getData();
                 String path = getPath(SetDataActivity.this, uri);
                 tv_getPic.setText(path);
                 final Uri file = Uri.fromFile(new File(path));
-                final StorageReference riversRef = mStorageRef.child(file.getLastPathSegment());
+                final StorageReference riversRef = mStorageRef.child("images/" +file.getLastPathSegment());
                 UploadTask uploadTask = riversRef.putFile(file);
                 uploadTask.addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -201,6 +232,7 @@ public class SetDataActivity extends AppCompatActivity {
                 }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        img_name = file.getLastPathSegment();
                         tv_getPic.setText(file.getLastPathSegment());
                         downloadImg(riversRef);
                     }

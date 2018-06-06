@@ -25,6 +25,7 @@
             android:layout_height="wrap_content">
         <EditText
             android:id="@+id/username"
+            android:text="b90797@yahoo.com"
             android:layout_width="match_parent"
             android:backgroundTint="@color/white"
             android:layout_height="wrap_content"
@@ -48,6 +49,7 @@
             >
         <EditText
             android:id="@+id/password"
+            android:text="123456"
             android:backgroundTint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
