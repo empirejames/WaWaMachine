@@ -2,6 +2,7 @@ package com.james.wawamachine;
 
 import android.*;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -9,6 +10,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -22,15 +24,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.kml.KmlLayer;
 
-import java.util.List;
-
-import pub.devrel.easypermissions.AppSettingsDialog;
-import pub.devrel.easypermissions.EasyPermissions;
 
 
 public class FirstFragment extends Fragment implements OnMapReadyCallback {
@@ -78,10 +75,10 @@ public class FirstFragment extends Fragment implements OnMapReadyCallback {
 
         MapsInitializer.initialize(getContext());
         mGooglemap = googleMap;
-        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(40.689247,-74.044502)).title("Statue of Lib").snippet("I hope go there"));
-        CameraPosition Liberty = CameraPosition.builder().target(new LatLng(40.689247,-74.044502)).zoom(16).bearing(0).tilt(45).build();
-        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Liberty));
+//        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+//        googleMap.addMarker(new MarkerOptions().position(new LatLng(40.689247,-74.044502)).title("Statue of Lib").snippet("I hope go there"));
+//        CameraPosition Liberty = CameraPosition.builder().target(new LatLng(40.689247,-74.044502)).zoom(16).bearing(0).tilt(45).build();
+//        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Liberty));
 
     }
     private void getCurrentLocation() {
@@ -90,9 +87,9 @@ public class FirstFragment extends Fragment implements OnMapReadyCallback {
 
         Location location = null;
         if (!(isGPSEnabled || isNetworkEnabled)){
-            //Toast.makeText(getActivity().getApplicationContext(), "這是一個Toast......", Toast.LENGTH_LONG).show();
+           // Toast.makeText(getActivity().getApplicationContext(), "這是一個Toast......", Toast.LENGTH_LONG).show();
         }
-        // Snackbar.make(R.layout.activity_maps, "error_location_provider", Snackbar.LENGTH_LONG).show();
+        //Snackbar.make(R.layout.activity_maps, "error_location_provider", Snackbar.LENGTH_LONG).show();
         else {
             if (isNetworkEnabled) {
 
@@ -116,6 +113,7 @@ public class FirstFragment extends Fragment implements OnMapReadyCallback {
         public void onLocationChanged(Location location) {
             if (location != null) {
                 Log.e(TAG, String.format("%f, %f", location.getLatitude(), location.getLongitude()));
+
                 drawMarker(location);
                 mLocationManager.removeUpdates(mLocationListener);
             } else {

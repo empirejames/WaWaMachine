@@ -75,8 +75,8 @@ public class ThirdFragment extends Fragment{
         passEditText = (EditText) view.findViewById(R.id.password);
         accoutLayout = (TextInputLayout) view.findViewById(R.id.account_layout);
         passwordLayout = (TextInputLayout) view.findViewById(R.id.password_layout);
-        passwordLayout.setErrorEnabled(true);
-        accoutLayout.setErrorEnabled(true);
+        //passwordLayout.setErrorEnabled(true);
+        //accoutLayout.setErrorEnabled(true);
         signUpBtn = (Button) view.findViewById(R.id.signup_button);
         //...
     }
