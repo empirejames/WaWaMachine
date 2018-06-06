@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -44,9 +46,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-
-import id.zelory.compressor.Compressor;
 
 public class SetDataActivity extends AppCompatActivity {
     Bundle bundle;
@@ -65,6 +66,7 @@ public class SetDataActivity extends AppCompatActivity {
     public static final int LOCATION_UPDATE_MIN_TIME = 5000;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static final int PICK_CONTACT_REQUEST = 1;
+    ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +76,7 @@ public class SetDataActivity extends AppCompatActivity {
         bundle = getIntent().getExtras();
         userId = bundle.getString("uid");
         email = bundle.getString("email");
+        imageView = (ImageView) findViewById(R.id.img_downlaod);
         mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         giv_location = (GifView)findViewById(R.id.gifView_location);
         giv_pciture = (GifView)findViewById(R.id.gifView_camera);
@@ -83,18 +86,15 @@ public class SetDataActivity extends AppCompatActivity {
         edit_name = (EditText)findViewById(R.id.edit_name);
         edit_price = (EditText)findViewById(R.id.edit_price);
         btn_send = (Button)findViewById(R.id.btn_send);
-
-
         email_content.setText(email);
         mStorageRef = FirebaseStorage.getInstance().getReference();
         imagesRef = mStorageRef.child("images");
-        Log.e(TAG,"img_path : " + img_name);
-        giv_location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getCurrentLocation();
-            }
-        });
+//        giv_location.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                getCurrentLocation();
+//            }
+//        });
         giv_pciture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,35 +125,34 @@ public class SetDataActivity extends AppCompatActivity {
             }
         });
     }
-    private void getCurrentLocation() {
-        boolean isGPSEnabled = mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        boolean isNetworkEnabled = mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        Log.e(TAG,"getCurrentLocation");
-        Location location = null;
-        if (!(isGPSEnabled || isNetworkEnabled)){
-            //Toast.makeText(getActivity().getApplicationContext(), "這是一個Toast......", Toast.LENGTH_LONG).show();
-        }
-        // Snackbar.make(R.layout.activity_maps, "error_location_provider", Snackbar.LENGTH_LONG).show();
-        else {
-            if (isNetworkEnabled) {
-
-                mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                        LOCATION_UPDATE_MIN_TIME, LOCATION_UPDATE_MIN_DISTANCE, mLocationListener);
-                location = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            }
-
-            if (isGPSEnabled) {
-                mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                        LOCATION_UPDATE_MIN_TIME, LOCATION_UPDATE_MIN_DISTANCE, mLocationListener);
-                location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            }
-        }
-        if (location != null){
-            edit_location.setText(location+"");
-            Log.e(TAG,location+"");
-        }
-            //drawMarker(location);
-    }
+//    private void getCurrentLocation() {
+//        boolean isGPSEnabled = mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+//        boolean isNetworkEnabled = mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+//        Log.e(TAG,"getCurrentLocation");
+//        Location location = null;
+//        if (!(isGPSEnabled || isNetworkEnabled)){
+//            //Toast.makeText(getActivity().getApplicationContext(), "這是一個Toast......", Toast.LENGTH_LONG).show();
+//        }
+//        // Snackbar.make(R.layout.activity_maps, "error_location_provider", Snackbar.LENGTH_LONG).show();
+//        else {
+//            if (isNetworkEnabled) {
+//                mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+//                        LOCATION_UPDATE_MIN_TIME, LOCATION_UPDATE_MIN_DISTANCE, mLocationListener);
+//                location = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+//            }
+//
+//            if (isGPSEnabled) {
+//                mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+//                        LOCATION_UPDATE_MIN_TIME, LOCATION_UPDATE_MIN_DISTANCE, mLocationListener);
+//                location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//            }
+//        }
+//        if (location != null){
+//            edit_location.setText(location+"");
+//            Log.e(TAG,location+"");
+//        }
+//            //drawMarker(location);
+//    }
     private LocationListener mLocationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
@@ -215,28 +214,40 @@ public class SetDataActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Compressor compressedImageFile;
         if (requestCode == PICK_CONTACT_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri uri = data.getData();
                 String path = getPath(SetDataActivity.this, uri);
-                tv_getPic.setText(path);
                 final Uri file = Uri.fromFile(new File(path));
-                final StorageReference riversRef = mStorageRef.child("images/" +file.getLastPathSegment());
-                UploadTask uploadTask = riversRef.putFile(file);
-                uploadTask.addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        tv_getPic.setText(exception.getMessage());
-                    }
-                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        img_name = file.getLastPathSegment();
-                        tv_getPic.setText(file.getLastPathSegment());
-                        downloadImg(riversRef);
-                    }
-                });
+                try{
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    bitmap = Bitmap.createScaledBitmap(bitmap,  600 ,600, true);
+                    //imageView.setImageBitmap(bitmap);
+                    tv_getPic.setText(file.getLastPathSegment());
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] bitmapData = baos.toByteArray();
+                    final StorageReference riversRef = mStorageRef.child("images/" +file.getLastPathSegment());
+                    UploadTask uploadTask = riversRef.putBytes(bitmapData);
+                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            tv_getPic.setText(exception.getMessage());
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            img_name = file.getLastPathSegment();
+                            tv_getPic.setText(file.getLastPathSegment());
+                            tv_getPic.setText("上傳完成");
+                            giv_pciture.setVisibility(View.INVISIBLE);
+                            //downloadImg(riversRef);
+                        }
+                    });
+                }catch (Exception e){
+
+                }
+
             }
         }
     }
