@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:aigestudio="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -62,6 +63,7 @@
             android:layout_alignBottom="@+id/location"
             android:layout_alignLeft="@+id/email_content"
             android:layout_alignStart="@+id/email_content"
+            android:ems="15"
             android:text="新北市樹林區中華路95巷4號"
             android:textSize="18sp" />
 
@@ -69,90 +71,27 @@
             android:id="@+id/item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tv_price"
-            android:layout_alignStart="@+id/tv_price"
-            android:layout_below="@+id/edit_price"
-            android:layout_marginTop="18dp"
+            android:layout_alignRight="@+id/location"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="150dp"
             android:text="內容物 :"
             android:textSize="18sp" />
 
-        <CheckedTextView
-            android:id="@+id/ctv_3c"
+        <com.aigestudio.wheelpicker.WheelPicker
+            android:id="@+id/main_wheel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/item"
-            android:layout_alignStart="@+id/item"
-            android:layout_below="@+id/item"
-            android:layout_marginTop="21dp"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:checked="false"
-            android:text="3C"
-            android:textSize="24sp" />
 
-        <CheckedTextView
-            android:id="@+id/ctv_kungchi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/ctv_3c"
-            android:layout_alignStart="@+id/ctv_3c"
-            android:layout_below="@+id/ctv_3c"
-            android:layout_marginTop="12dp"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:checked="false"
-            android:text="公仔"
-            android:textSize="24sp" />
-
-        <CheckedTextView
-            android:id="@+id/ctv_buoh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/ctv_kungchi"
-            android:layout_alignStart="@+id/ctv_kungchi"
-            android:layout_below="@+id/ctv_kungchi"
-            android:layout_marginTop="12dp"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:checked="false"
-            android:text="布偶"
-            android:textSize="24sp" />
-
-        <CheckedTextView
-            android:id="@+id/ctv_cloth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/ctv_kungchi"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="80dp"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:checked="false"
-            android:text="衣服"
-            android:textSize="24sp" />
-
-        <CheckedTextView
-            android:id="@+id/ctv_present"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/ctv_kungchi"
-            android:layout_alignBottom="@+id/ctv_kungchi"
-            android:layout_alignLeft="@+id/ctv_cloth"
-            android:layout_alignStart="@+id/ctv_cloth"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:checked="false"
-            android:text="禮物包"
-            android:textSize="24sp" />
-
-        <CheckedTextView
-            android:id="@+id/ctv_other"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/ctv_buoh"
-            android:layout_alignBottom="@+id/ctv_buoh"
-            android:layout_alignLeft="@+id/ctv_present"
-            android:layout_alignStart="@+id/ctv_present"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:checked="false"
-            android:text="其他"
-            android:textSize="24sp" />
+            android:layout_below="@+id/edit_line"
+            android:layout_centerHorizontal="true"
+            android:background="#FFFFFF"
+            aigestudio:wheel_atmospheric="true"
+            aigestudio:wheel_curved="true"
+            aigestudio:wheel_cyclic="true"
+            aigestudio:wheel_item_align="center"
+            aigestudio:wheel_item_text_color="#A7A7DB"
+            aigestudio:wheel_item_text_size="20dp"
+            aigestudio:wheel_selected_item_text_color="#536D8A" />
 
         <TextView
             android:id="@+id/textView"
@@ -251,13 +190,38 @@
             android:text="390"
             android:textSize="18sp" />
 
+
+        <TextView
+            android:id="@+id/tv_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/edit_line"
+            android:layout_alignBottom="@+id/edit_line"
+            android:layout_toLeftOf="@+id/email_content"
+            android:layout_toStartOf="@+id/email_content"
+            android:text="Line ID :"
+            android:textSize="18sp" />
+        <EditText
+            android:id="@+id/edit_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/edit_name"
+            android:layout_alignStart="@+id/edit_name"
+            android:layout_below="@+id/edit_price"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="empirejames"
+            android:textSize="18dp" />
+
         <Button
             android:id="@+id/btn_send"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:text="上傳" />
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/selector_xml_btn_yellow"
+            android:text="填好了" />
 
     </RelativeLayout>
 

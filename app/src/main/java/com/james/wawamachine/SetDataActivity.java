@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -32,6 +34,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aigestudio.wheelpicker.WheelPicker;
 import com.ant.liao.GifView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
@@ -48,17 +51,23 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
-public class SetDataActivity extends AppCompatActivity {
+public class SetDataActivity extends AppCompatActivity implements WheelPicker.OnItemSelectedListener{
     Bundle bundle;
     String userId, email;
     String latitude, longitude;
     String TAG = SetDataActivity.class.getSimpleName();
     GifView giv_location, giv_pciture;
     TextView tv_getPic, email_content ;
-    EditText edit_location, edit_name, edit_price;
+    EditText edit_location, edit_name, edit_price, edit_lineid;
     Button btn_send;
     String img_name;
+    String gpsLocation[] = new String[2];
+    String contenter = "娃娃";
+    private WheelPicker wheelCenter;
 
     private LocationManager mLocationManager;
     private StorageReference mStorageRef , imagesRef;
@@ -85,16 +94,24 @@ public class SetDataActivity extends AppCompatActivity {
         edit_location = (EditText)findViewById(R.id.edit_location);
         edit_name = (EditText)findViewById(R.id.edit_name);
         edit_price = (EditText)findViewById(R.id.edit_price);
+        edit_lineid = (EditText)findViewById(R.id.edit_line);
         btn_send = (Button)findViewById(R.id.btn_send);
         email_content.setText(email);
         mStorageRef = FirebaseStorage.getInstance().getReference();
         imagesRef = mStorageRef.child("images");
-//        giv_location.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                getCurrentLocation();
-//            }
-//        });
+
+        wheelCenter = (WheelPicker) findViewById(R.id.main_wheel);
+        List<String> data = new ArrayList<>();
+        data.add("娃娃" );
+        data.add("公仔" );
+        data.add("衣服" );
+        data.add("禮物包" );
+        data.add("3C" );
+        data.add("其他" );
+        wheelCenter.setData(data);
+        wheelCenter.setIndicatorSize(1);
+        wheelCenter.setOnItemSelectedListener(this);
+
         giv_pciture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,20 +121,45 @@ public class SetDataActivity extends AppCompatActivity {
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                writeData(email,edit_location.getText().toString(),edit_name.getText().toString(),edit_price.getText().toString());
-                finish();
+
+                gpsLocation =  convertAddress(edit_location.getText().toString());
+                if (inputCheck()){
+                    writeData(email,edit_location.getText().toString(),edit_name.getText().toString(),edit_price.getText().toString(),gpsLocation[0],gpsLocation[1],edit_lineid.getText().toString(),contenter);
+                    Toast.makeText(SetDataActivity.this, "已完成登入程序，馬上會為您新增上地圖", Toast.LENGTH_LONG).show();
+                    finish();
+                }
             }
         });
     }
+    private boolean inputCheck(){
+        boolean isPass = false;
+        if(edit_location.getText().toString().equals("")){
+            Toast.makeText(SetDataActivity.this, "地點不得為空", Toast.LENGTH_LONG).show();
+        }else if(edit_name.getText().toString().equals("")){
+            Toast.makeText(SetDataActivity.this, "名稱不得為空", Toast.LENGTH_LONG).show();
+        }else if(edit_price.getText().toString().equals("")){
+            Toast.makeText(SetDataActivity.this, "保夾金不得為空", Toast.LENGTH_LONG).show();
+        }else if(!tv_getPic.getText().toString().equals("上傳完成")){
+            Toast.makeText(SetDataActivity.this, "照片沒有選擇或上傳失敗，請再次試試", Toast.LENGTH_LONG).show();
+        }else if(contenter.toString().equals("")){
+            Toast.makeText(SetDataActivity.this, "沒有選擇內容物", Toast.LENGTH_LONG).show();
+        } else{
+            isPass = true;
+        }
+        return isPass;
+    }
 
-
-    private void writeData(final String email,final String location,final String name,final String price){
+    private void writeData(final String email,final String location,final String name,final String price, final String longitude, final String latitude, final String line_id, final String contenter){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference userRef = database.getReference("user").child(userId);
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-               userRef.push().setValue(new User(email,location,name,price,img_name));
+
+
+
+
+               userRef.push().setValue(new User(email,location,name,price,img_name,longitude, latitude,line_id,contenter));
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -203,6 +245,21 @@ public class SetDataActivity extends AppCompatActivity {
             getLocalImg();
         }
 
+    }
+
+    public String[] convertAddress(String addressString){
+        String result [] = new String[2];
+        try{
+            Geocoder geoCoder = new Geocoder(SetDataActivity.this, Locale.getDefault());
+            List<Address> addressLocation = geoCoder.getFromLocationName(addressString, 1);
+            double latitude = addressLocation.get(0).getLatitude();
+            double longitude = addressLocation.get(0).getLongitude();
+            result[0] = latitude+"";
+            result[1] = longitude + "";
+        }catch(Exception e){
+            Log.e(TAG, "Exception e : " + e.getMessage());
+        }
+        return result;
     }
     private void getLocalImg(){
         Intent picker = new Intent(Intent.ACTION_GET_CONTENT);
@@ -376,6 +433,18 @@ public class SetDataActivity extends AppCompatActivity {
      */
     public static boolean isMediaDocument(Uri uri) {
         return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+    @Override
+    public void onItemSelected(WheelPicker picker, Object data, int position) {
+        String text = "";
+        switch (picker.getId()) {
+            case R.id.main_wheel:
+                text = "選擇的是 :";
+                contenter = String.valueOf(data);
+                break;
+        }
+        Toast.makeText(this, text + String.valueOf(data), Toast.LENGTH_SHORT).show();
     }
 
 }
