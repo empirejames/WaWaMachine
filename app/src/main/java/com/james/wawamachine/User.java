@@ -4,7 +4,7 @@ package com.james.wawamachine;
  * Created by 101716 on 2018/6/6.
  */
 
-public class User {
+public class  User {
     private String email;
     private String location;
     private String name;
@@ -34,56 +34,56 @@ public class User {
     }
 
     public void setEmail(String email) {
-        email = email;
+        this.email = email;
     }
     public String getLocation() {
         return location;
     }
 
     public void setLocation(String location) {
-        location = location;
+        this.location = location;
     }
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        name = name;
+        this.name = name;
     }
     public String getPrice() {
         return price;
     }
 
     public void setPrice(String price) {
-        price = price;
+        this.price = price;
     }
     public String getImgName() {
         return imgName;
     }
 
     public void setImgName(String imgName) {
-        imgName = imgName;
+        this.imgName = imgName;
     }
     public String getLongtitude (){
         return longtitude;
     }
 
     public void setLongtitude(String longtitude) {
-        longtitude = longtitude;
+        this.longtitude = longtitude;
     }
     public String getLatitude() {
         return latitude;
     }
 
     public void setLatitude(String latitude) {
-        latitude = latitude;
+        this.latitude = latitude;
     }
     public String getLineID() {
         return lineid;
     }
 
     public void setLineID(String lineid) {
-        lineid = lineid;
+        this.lineid = lineid;
     }
 
     public String getContanter() {
@@ -91,6 +91,6 @@ public class User {
     }
 
     public void setContanter(String contanter) {
-        contanter = contanter;
+        this.contanter = contanter;
     }
 }

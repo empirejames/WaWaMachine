@@ -56,8 +56,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class SetDataActivity extends AppCompatActivity implements WheelPicker.OnItemSelectedListener{
-    Bundle bundle;
-    String userId, email;
     String latitude, longitude;
     String TAG = SetDataActivity.class.getSimpleName();
     GifView giv_location, giv_pciture;
@@ -67,6 +65,9 @@ public class SetDataActivity extends AppCompatActivity implements WheelPicker.On
     String img_name;
     String gpsLocation[] = new String[2];
     String contenter = "娃娃";
+    Bundle bundle;
+    String userId, email;
+
     private WheelPicker wheelCenter;
 
     private LocationManager mLocationManager;
@@ -155,10 +156,6 @@ public class SetDataActivity extends AppCompatActivity implements WheelPicker.On
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-
-
                userRef.push().setValue(new User(email,location,name,price,img_name,longitude, latitude,line_id,contenter));
             }
             @Override

@@ -67,9 +67,6 @@ public class ThirdFragment extends Fragment{
 
             }
         });
-
-
-
         return view;
     }
     private void initView(View view) {
@@ -120,7 +117,12 @@ public class ThirdFragment extends Fragment{
                             }
                         } else {
                             //writeData();
-                            Intent i = new Intent(getActivity(), SetDataActivity.class);
+//                            Intent i = new Intent(getActivity(), SetDataActivity.class);
+//                            i.putExtra("name", user.getDisplayName());
+//                            i.putExtra("uid", user.getUid());
+//                            i.putExtra("email", user.getEmail());
+//                            startActivity(i);
+                            Intent i = new Intent(getActivity(),MemberActivity.class);
                             i.putExtra("name", user.getDisplayName());
                             i.putExtra("uid", user.getUid());
                             i.putExtra("email", user.getEmail());
