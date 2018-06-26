@@ -64,7 +64,7 @@
             android:layout_alignLeft="@+id/email_content"
             android:layout_alignStart="@+id/email_content"
             android:ems="15"
-            android:text="新北市樹林區中華路95巷4號"
+            android:hint="Ex.台北市市民大道一段209號"
             android:textSize="18sp" />
 
         <TextView
@@ -164,8 +164,8 @@
             android:layout_alignLeft="@+id/edit_location"
             android:layout_alignStart="@+id/edit_location"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="樹中店" />
+            android:hint="Ex.七龍珠一號機"
+            android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/tv_price"
@@ -186,8 +186,8 @@
             android:layout_alignStart="@+id/edit_name"
             android:layout_below="@+id/edit_name"
             android:ems="10"
+            android:hint="Ex.1680"
             android:inputType="textPersonName"
-            android:text="390"
             android:textSize="18sp" />
 
 
@@ -209,8 +209,8 @@
             android:layout_alignStart="@+id/edit_name"
             android:layout_below="@+id/edit_price"
             android:ems="10"
+            android:hint="Ex.abc14125"
             android:inputType="textPersonName"
-            android:text="empirejames"
             android:textSize="18dp" />
 
         <Button
