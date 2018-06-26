@@ -31,39 +31,101 @@
         android:padding="2dp"
         android:gravity="center_vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceListItem"
-            android:text="樹中店"
-            android:textColor="#000000"
-            android:lines="1"
-            android:id="@+id/wawa_store" />
-        <TextView
-            android:id="@+id/wawa_line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceListItem"
-            android:text="Line ID"
-            android:textColor="#000000"
-            android:lines="1"
-             />
-        <TextView
-            android:id="@+id/wawa_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#000000"
-            android:text="Price"
-             />
-
-        <TextView
-            android:id="@+id/wawa_content"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:text="Content"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <com.ant.liao.GifView
+                android:id="@+id/gifView_location"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="5dp"
+                android:background="@mipmap/location" />
+
+            <TextView
+                android:id="@+id/wawa_store"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:layout_marginLeft="5dp"
+                android:text="樹中店"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textColor="#000000" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <com.ant.liao.GifView
+                android:id="@+id/gifView_line"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="5dp"
+                android:background="@mipmap/line" />
+
+            <TextView
+                android:id="@+id/wawa_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="Line ID"
+                android:layout_marginLeft="5dp"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <com.ant.liao.GifView
+                android:id="@+id/gifView_toys"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="5dp"
+                android:background="@mipmap/toys" />
+
+            <TextView
+                android:id="@+id/wawa_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <com.ant.liao.GifView
+                android:id="@+id/gifView_price"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="5dp"
+                android:background="@mipmap/money" />
+
+            <TextView
+                android:id="@+id/wawa_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Price"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#000000" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

@@ -18,6 +18,15 @@
         android:layout_marginTop="10dp"
         android:id="@+id/relativeLayout">
 
+        <com.ant.liao.GifView
+            android:id="@+id/gifView_mail"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignEnd="@+id/gifView_locatial"
+            android:layout_alignRight="@+id/gifView_locatial"
+            android:layout_alignTop="@+id/email"
+            android:layout_marginRight="5dp"
+            android:background="@mipmap/mail" />
         <TextView
             android:id="@+id/email"
             android:layout_width="wrap_content"
@@ -25,8 +34,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="32dp"
-            android:layout_marginStart="32dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginStart="35dp"
             android:layout_marginTop="15dp"
             android:text="信箱 : "
             android:textSize="18sp" />
@@ -44,6 +53,15 @@
             android:text="xxxx@hotmail.com"
             android:textSize="18sp" />
 
+        <com.ant.liao.GifView
+            android:id="@+id/gifView_locatial"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignTop="@+id/location"
+            android:layout_toLeftOf="@+id/location"
+            android:layout_toStartOf="@+id/location"
+            android:layout_marginRight="5dp"
+            android:background="@mipmap/location" />
         <TextView
             android:id="@+id/location"
             android:layout_width="wrap_content"
@@ -93,6 +111,15 @@
             aigestudio:wheel_item_text_size="20dp"
             aigestudio:wheel_selected_item_text_color="#536D8A" />
 
+        <com.ant.liao.GifView
+            android:id="@+id/gifView_picture"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignTop="@+id/textView"
+            android:layout_toLeftOf="@+id/textView"
+            android:layout_toStartOf="@+id/textView"
+            android:layout_marginRight="5dp"
+            android:background="@mipmap/camera" />
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -117,21 +144,12 @@
 
         <com.ant.liao.GifView
             android:id="@+id/gifView_camera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignTop="@+id/img_downlaod"
             android:layout_toEndOf="@+id/img_downlaod"
             android:layout_toRightOf="@+id/img_downlaod"
             android:background="@drawable/ic_camera_alt_36dp" />
-        <com.ant.liao.GifView
-            android:id="@+id/gifView_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/gifView_camera"
-            android:layout_alignStart="@+id/gifView_camera"
-            android:layout_alignTop="@+id/edit_location"
-            android:visibility="invisible"
-            android:background="@drawable/ic_location_on_36dp" />
 
         <ImageView
             android:id="@+id/img_downlaod"
@@ -144,13 +162,22 @@
             android:layout_toRightOf="@+id/tv_getPic"
             app:srcCompat="@mipmap/account" />
 
+        <com.ant.liao.GifView
+            android:id="@+id/gifView_wawagi"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignTop="@+id/tv_name"
+            android:layout_toLeftOf="@+id/tv_name"
+            android:layout_toStartOf="@+id/tv_name"
+            android:layout_marginRight="5dp"
+            android:background="@mipmap/wawagi" />
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/location"
             android:layout_alignStart="@+id/location"
-            android:layout_below="@+id/gifView_location"
+            android:layout_below="@+id/location"
             android:layout_marginTop="22dp"
             android:textSize="18sp"
             android:text="名稱 :" />
@@ -167,14 +194,24 @@
             android:hint="Ex.七龍珠一號機"
             android:inputType="textPersonName" />
 
+        <com.ant.liao.GifView
+            android:id="@+id/gifView_money"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignTop="@+id/tv_price"
+            android:layout_toLeftOf="@+id/tv_price"
+            android:layout_toStartOf="@+id/tv_price"
+            android:layout_marginRight="5dp"
+            android:background="@mipmap/money" />
+
         <TextView
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/edit_price"
-            android:layout_alignBottom="@+id/edit_price"
-            android:layout_toLeftOf="@+id/email_content"
-            android:layout_toStartOf="@+id/email_content"
+            android:layout_alignLeft="@+id/tv_name"
+            android:layout_alignStart="@+id/tv_name"
+            android:layout_below="@+id/tv_name"
+            android:layout_marginTop="22dp"
             android:text="保夾價 :"
             android:textSize="18sp" />
 
@@ -182,32 +219,45 @@
             android:id="@+id/edit_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/edit_name"
-            android:layout_alignStart="@+id/edit_name"
-            android:layout_below="@+id/edit_name"
+            android:layout_alignBaseline="@+id/tv_price"
+            android:layout_alignBottom="@+id/tv_price"
+            android:layout_alignLeft="@+id/edit_location"
+            android:layout_alignStart="@+id/edit_location"
+            android:layout_marginLeft="5dp"
             android:ems="10"
             android:hint="Ex.1680"
             android:inputType="textPersonName"
             android:textSize="18sp" />
 
+        <com.ant.liao.GifView
+            android:id="@+id/gifView_line"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignTop="@+id/tv_line"
+            android:layout_toLeftOf="@+id/tv_line"
+            android:layout_toStartOf="@+id/tv_line"
+            android:layout_marginRight="5dp"
+            android:background="@mipmap/line" />
 
         <TextView
             android:id="@+id/tv_line"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/edit_line"
-            android:layout_alignBottom="@+id/edit_line"
-            android:layout_toLeftOf="@+id/email_content"
-            android:layout_toStartOf="@+id/email_content"
+            android:layout_alignLeft="@+id/tv_price"
+            android:layout_alignStart="@+id/tv_price"
+            android:layout_below="@+id/tv_price"
+            android:layout_marginTop="22dp"
             android:text="Line ID :"
             android:textSize="18sp" />
+
         <EditText
             android:id="@+id/edit_line"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/edit_name"
-            android:layout_alignStart="@+id/edit_name"
-            android:layout_below="@+id/edit_price"
+            android:layout_alignBaseline="@+id/tv_line"
+            android:layout_alignBottom="@+id/tv_line"
+            android:layout_alignLeft="@+id/edit_price"
+            android:layout_alignStart="@+id/edit_price"
             android:ems="10"
             android:hint="Ex.abc14125"
             android:inputType="textPersonName"
