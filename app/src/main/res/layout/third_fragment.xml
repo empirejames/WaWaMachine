@@ -25,7 +25,6 @@
             android:layout_height="wrap_content">
         <EditText
             android:id="@+id/username"
-            android:text="b90797@yahoo.com"
             android:layout_width="match_parent"
             android:backgroundTint="@color/white"
             android:layout_height="wrap_content"
@@ -47,9 +46,9 @@
             android:textColorHint="@color/gray"
 
             >
+
         <EditText
             android:id="@+id/password"
-            android:text="123456"
             android:backgroundTint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,11 +63,22 @@
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF" />
         </android.support.design.widget.TextInputLayout>
+        <CheckBox
+            android:id="@+id/chkRemeber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="記住我"
+            android:textColor="#FFF"
+            android:textSize="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="5dp"
+            android:layout_below="@+id/password_layout"
+            android:layout_alignParentRight="true" />
         <Button
             android:id="@+id/signup_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/password_layout"
+            android:layout_below="@+id/chkRemeber"
             android:layout_marginTop="30dp"
             android:background="@drawable/selector_xml_btn_yellow"
             android:text="快速註冊/登入" />

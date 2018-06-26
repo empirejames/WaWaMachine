@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.james.wawamachine.database.TinyDB;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,8 +44,9 @@ public class ThirdFragment extends Fragment{
     private FirebaseAuth mAuth;
     private View view;
     private String account, password;
-
-
+    private CheckBox chkRemeber;
+    private TinyDB tinydb;
+    boolean remeberMe;
     public ThirdFragment() {
         // Required empty public constructor
     }
@@ -57,7 +61,9 @@ public class ThirdFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.third_fragment, container, false);
+        tinydb = new TinyDB(getActivity().getApplicationContext());
         initView(view);
+
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,11 +81,45 @@ public class ThirdFragment extends Fragment{
         passEditText = (EditText) view.findViewById(R.id.password);
         accoutLayout = (TextInputLayout) view.findViewById(R.id.account_layout);
         passwordLayout = (TextInputLayout) view.findViewById(R.id.password_layout);
+        chkRemeber = (CheckBox) view.findViewById(R.id.chkRemeber);
         //passwordLayout.setErrorEnabled(true);
         //accoutLayout.setErrorEnabled(true);
+
+            if (tinydb.getString("account") != "") {
+                emailEditText.setText(tinydb.getString("account"));
+                passEditText.setText(tinydb.getString("password"));
+                chkRemeber.setChecked(true);
+            }
+
         signUpBtn = (Button) view.findViewById(R.id.signup_button);
-        //...
+
+        chkRemeber.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (chkRemeber.isChecked()) {
+                    Log.e(TAG,"Save click");
+                    saveUserInfo(true, emailEditText.getText().toString(), passEditText.getText().toString());
+                } else {
+                    Log.e(TAG,"NoSave click");
+                    emailEditText.setText("");
+                    passEditText.setText("");
+                }
+            }
+        });
     }
+    public void saveUserInfo(boolean isSave, String account, String password) {
+        if (isSave) {
+            tinydb.putString("account", account);
+            tinydb.putString("password", password);
+            remeberMe = true;
+        } else {
+            tinydb.putString("account", "");
+            tinydb.putString("password", "");
+            remeberMe = false;
+        }
+
+    }
+
     private boolean inputCheck(){
         account = emailEditText.getText().toString();
         if (!isValidEmail(account)) {

@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         adapter.addFragment(new SecondFragment(), "找娃娃機台");
         adapter.addFragment(new ThirdFragment(), "我想加入地圖");
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(2);
     }
 
     @Override

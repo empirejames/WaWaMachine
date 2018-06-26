@@ -132,7 +132,7 @@ public class SecondFragment extends Fragment implements OnMapReadyCallback {
             }
         }
         if (location != null)
-            drawMarker(location);
+            drawMarkerＭyself(location);
     }
 
     private LocationListener mLocationListener = new LocationListener() {
@@ -140,7 +140,7 @@ public class SecondFragment extends Fragment implements OnMapReadyCallback {
         public void onLocationChanged(Location location) {
             if (location != null) {
                 Log.e(TAG, String.format("%f, %f", location.getLatitude(), location.getLongitude()));
-                drawMarker(location);
+                drawMarkerＭyself(location);
                 mLocationManager.removeUpdates(mLocationListener);
             } else {
                 Log.e(TAG,"Location is null");
@@ -160,7 +160,7 @@ public class SecondFragment extends Fragment implements OnMapReadyCallback {
         }
     };
 
-    private void drawMarker(Location location) {
+    private void drawMarkerＭyself(Location location) {
         if (mGooglemap != null) {
             mGooglemap.clear();
             try{
