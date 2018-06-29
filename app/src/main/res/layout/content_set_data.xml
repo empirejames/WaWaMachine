@@ -25,7 +25,6 @@
             android:layout_alignEnd="@+id/gifView_locatial"
             android:layout_alignRight="@+id/gifView_locatial"
             android:layout_alignTop="@+id/email"
-            android:layout_marginRight="5dp"
             android:background="@mipmap/mail" />
         <TextView
             android:id="@+id/email"
@@ -83,6 +82,7 @@
             android:layout_alignStart="@+id/email_content"
             android:ems="15"
             android:hint="Ex.台北市市民大道一段209號"
+            android:textColorHint="@color/colorGray"
             android:textSize="18sp" />
 
         <TextView
@@ -146,21 +146,11 @@
             android:id="@+id/gifView_camera"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignTop="@+id/img_downlaod"
-            android:layout_toEndOf="@+id/img_downlaod"
-            android:layout_toRightOf="@+id/img_downlaod"
-            android:background="@drawable/ic_camera_alt_36dp" />
-
-        <ImageView
-            android:id="@+id/img_downlaod"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/tv_getPic"
-            android:layout_marginLeft="23dp"
-            android:layout_marginStart="23dp"
+            android:layout_alignTop="@+id/tv_getPic"
             android:layout_toEndOf="@+id/tv_getPic"
             android:layout_toRightOf="@+id/tv_getPic"
-            app:srcCompat="@mipmap/account" />
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/ic_camera_alt_36dp" />
 
         <com.ant.liao.GifView
             android:id="@+id/gifView_wawagi"
@@ -192,6 +182,7 @@
             android:layout_alignStart="@+id/edit_location"
             android:ems="10"
             android:hint="Ex.七龍珠一號機"
+            android:textColorHint="@color/colorGray"
             android:inputType="textPersonName" />
 
         <com.ant.liao.GifView
@@ -223,9 +214,11 @@
             android:layout_alignBottom="@+id/tv_price"
             android:layout_alignLeft="@+id/edit_location"
             android:layout_alignStart="@+id/edit_location"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="15dp"
+            android:digits="1234567890"
             android:ems="10"
             android:hint="Ex.1680"
+            android:textColorHint="@color/colorGray"
             android:inputType="textPersonName"
             android:textSize="18sp" />
 
@@ -260,6 +253,7 @@
             android:layout_alignStart="@+id/edit_price"
             android:ems="10"
             android:hint="Ex.abc14125"
+            android:textColorHint="@color/colorGray"
             android:inputType="textPersonName"
             android:textSize="18dp" />
 
@@ -272,6 +266,16 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/selector_xml_btn_yellow"
             android:text="填好了" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_line"
+            android:layout_toEndOf="@+id/edit_line"
+            android:layout_toRightOf="@+id/edit_line"
+            android:textColor="@color/colorLightpink"
+            android:text=" (選填)" />
 
     </RelativeLayout>
 

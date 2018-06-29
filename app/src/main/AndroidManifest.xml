@@ -33,15 +33,18 @@
         <activity
             android:name=".SetDataActivity"
             android:label="@string/title_activity_set_data"
-            android:theme="@style/MyMaterialTheme"></activity>
+            android:theme="@style/MyMaterialTheme">
+        </activity>
         <activity
             android:name=".MemberActivity"
             android:label="@string/title_activity_member"
-            android:theme="@style/MyMaterialTheme"></activity>
+            android:theme="@style/MyMaterialTheme">
+        </activity>
         <activity
             android:name=".ListMyActivity"
             android:label="@string/title_activity_list_my"
-            android:theme="@style/MyMaterialTheme"></activity>
+            android:theme="@style/MyMaterialTheme">
+        </activity>
     </application>
 
 </manifest>

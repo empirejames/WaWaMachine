@@ -97,18 +97,16 @@ import java.util.ArrayList;
                     Log.e(TAG, exception.getMessage());
                 }
             });
-
-
-
-
-
-
-
             Log.e(TAG, " Get View " + item.getName());
             holder.storeName = (TextView) row.findViewById(R.id.wawa_store);
             holder.storeName.setText(item.getName());
             holder.lineID = (TextView) row.findViewById(R.id.wawa_line);
-            holder.lineID.setText(item.getLineID());
+
+            if(item.getLineID().equals("")){
+                holder.lineID.setText("無");
+            }else{
+                holder.lineID.setText(item.getLineID());
+            }
             holder.price = (TextView) row.findViewById(R.id.wawa_price);
             holder.price.setText(item.getPrice());
             holder.content = (TextView) row.findViewById(R.id.wawa_content);

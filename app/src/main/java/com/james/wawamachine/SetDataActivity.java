@@ -26,6 +26,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -54,6 +56,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SetDataActivity extends AppCompatActivity implements WheelPicker.OnItemSelectedListener{
     String latitude, longitude;
@@ -86,13 +90,13 @@ public class SetDataActivity extends AppCompatActivity implements WheelPicker.On
         bundle = getIntent().getExtras();
         userId = bundle.getString("uid");
         email = bundle.getString("email");
-        imageView = (ImageView) findViewById(R.id.img_downlaod);
         mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         giv_location = (GifView)findViewById(R.id.gifView_location);
         giv_pciture = (GifView)findViewById(R.id.gifView_camera);
         tv_getPic = (TextView)findViewById(R.id.tv_getPic);
         email_content = (TextView)findViewById(R.id.email_content);
         edit_location = (EditText)findViewById(R.id.edit_location);
+        edit_location.setFilters(new InputFilter[]{typeFilter});
         edit_name = (EditText)findViewById(R.id.edit_name);
         edit_price = (EditText)findViewById(R.id.edit_price);
         edit_lineid = (EditText)findViewById(R.id.edit_line);
@@ -132,6 +136,17 @@ public class SetDataActivity extends AppCompatActivity implements WheelPicker.On
             }
         });
     }
+
+    InputFilter typeFilter = new InputFilter() {
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            Pattern p = Pattern.compile("[0-9a-zA-Z|\\u4e00-\\u9fa5]+");
+            Matcher m = p.matcher(source.toString());
+            if (!m.matches()) return "";
+            return null;
+        }
+    };
+
     private boolean inputCheck(){
         boolean isPass = false;
         if(edit_location.getText().toString().equals("")){
@@ -202,6 +217,8 @@ public class SetDataActivity extends AppCompatActivity implements WheelPicker.On
                 longitude = location.getLongitude()+"";
                 mLocationManager.removeUpdates(mLocationListener);
             } else {
+                latitude = "0";
+                longitude = "0";
                 Log.e(TAG,"Location is null");
             }
         }
@@ -254,6 +271,8 @@ public class SetDataActivity extends AppCompatActivity implements WheelPicker.On
             result[0] = latitude+"";
             result[1] = longitude + "";
         }catch(Exception e){
+            result[0] = "0";
+            result[1] = "0";
             Log.e(TAG, "Exception e : " + e.getMessage());
         }
         return result;
@@ -306,7 +325,7 @@ public class SetDataActivity extends AppCompatActivity implements WheelPicker.On
         }
     }
     private void downloadImg(final StorageReference ref){
-        final ImageView imageView = (ImageView) findViewById(R.id.img_downlaod);
+        //final ImageView imageView = (ImageView) findViewById(R.id.img_downlaod);
         if(ref == null){
             Toast.makeText(SetDataActivity.this, "請先上傳照片", Toast.LENGTH_SHORT).show();
             return;
